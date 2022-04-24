@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+html, body, #app, .el-container, .el-menu {
+  height: 100vh;
+}
+svg {
+  width: 1em;
+  height: 1em;
+}
+.el-popover {
+  padding: 0 !important;
+}
