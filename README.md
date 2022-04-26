@@ -1,4 +1,4 @@
-# <font color="#42b983">Vue 3 + Typescript + Vite + ElementPlus</font>
+# <font color="#42b983">Vue3 + Typescript + Vite + ElementPlus</font>
 
 ## 二次封装ElementPlus组件
 

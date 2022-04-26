@@ -25,6 +25,10 @@
         <el-icon-tickets />
         <span>表单</span>
       </el-menu-item>
+      <el-menu-item index="7" @click="clickItem(7)">
+        <el-icon-chatround />
+        <span>弹出框表单</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -57,6 +61,9 @@ let clickItem = (index: Number) => {
     case 6:
       $router.push({ path: '/form' })
     break
+    case 7:
+      $router.push({ path: '/modalForm' })
+    break
     default:
     break
   }
@@ -69,7 +76,7 @@ let clickItem = (index: Number) => {
 }
 .el-menu-item {
   span {
-    padding: 0 55px 0 7px;
+    padding: 0 0 0 7px;
   }
 }
 </style>

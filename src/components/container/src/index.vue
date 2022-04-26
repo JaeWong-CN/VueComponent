@@ -9,7 +9,6 @@
           <nav-header v-model:collapse="isCollapse" />
         </el-header>
         <el-main>
-          <router-link to="/chooseArea"></router-link>
           <router-view />
         </el-main>
       </el-container>

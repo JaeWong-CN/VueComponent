@@ -1,6 +1,6 @@
 <template>
   <div class="home-txt">
-    Vue3 + TypeScript + Vite2 + ElementPlus
+    Vue3 + TypeScript + Vite + ElementPlus
   </div>
 </template>
 

@@ -5,6 +5,7 @@ import trend from './trend'
 import notification from './notification'
 import list from './list'
 import form from './form'
+import modalForm from './modalForm'
 
 const components = [
   chooseArea,
@@ -12,7 +13,8 @@ const components = [
   trend,
   notification,
   list,
-  form
+  form,
+  modalForm
 ]
 
 export default {

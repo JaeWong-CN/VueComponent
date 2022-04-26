@@ -1,43 +1,22 @@
+<!--弹出框表单-->
 <template>
   <div>
-    <m-form
-      ref="form"
-      label-width="auto"
-      :options="options"
-      @on-change="handleChange"
-      @before-upload="handleBeforeUpload"
-      @on-preview="handlePreview"
-      @on-remove="handleRemove"
-      @before-remove="beforeRemove"
-      @on-success="handleSuccess"
-      @on-exceed="handleExceed"
-    >
-      <template #uploadArea>
-        <el-button size="small" type="primary">点击上传</el-button>
+    <el-button type="primary" @click="open">新增</el-button>
+    <m-modal-form title="新增" v-model:visible="visible" :options="options">
+      <template #footer="{ form }">
+        <el-button @click="cancle(form)">取消</el-button>
+        <el-button type="primary" @click="submit(form)">提交</el-button>
       </template>
-      <template #uploadTip>
-        <div style="color: #ccc;font-size: 12px;">这个上传的随便你传~</div>
-      </template>
-      <template #action="scope">
-        <div>
-          <el-button type="primary" @click="submitForm(scope)">提交</el-button>
-          <el-button @click="resetForm">重置</el-button>
-        </div>
-      </template>
-    </m-form>
+    </m-modal-form>
   </div>
 </template>
 
 <script lang='ts' setup>
 import { ref } from 'vue'
-import { FormInstance, FormOptions } from "../../components/form/src/types/types"
-import { ElMessage, ElMessageBox } from 'element-plus'
+import { FormInstance, FormOptions } from '../../components/form/src/types/types'
+import { ElMessage } from 'element-plus'
 
-interface Scope {
-  form: FormInstance,
-  model: any
-}
-
+let visible = ref<boolean>(false)
 let options: FormOptions[] = [
   {
     type: 'input',
@@ -190,22 +169,22 @@ let options: FormOptions[] = [
       }
     ]
   },
-  {
-    type: 'upload',
-    label: '上传头像',
-    prop: 'pic',
-    uploadAttrs: {
-      action: 'https://jsonplaceholder.typicode.com/posts/',
-      limit: 1
-    },
-    rules: [
-      {
-        required: true,
-        message: '请上传头像',
-        trigger: 'blur'
-      }
-    ]
-  },
+  // {
+  //   type: 'upload',
+  //   label: '上传头像',
+  //   prop: 'pic',
+  //   uploadAttrs: {
+  //     action: 'https://jsonplaceholder.typicode.com/posts/',
+  //     limit: 1
+  //   },
+  //   rules: [
+  //     {
+  //       required: true,
+  //       message: '请上传头像',
+  //       trigger: 'blur'
+  //     }
+  //   ]
+  // },
   {
     type: 'editor',
     value: '',
@@ -222,48 +201,29 @@ let options: FormOptions[] = [
   }
 ]
 
-let form = ref<FormInstance | null>()
+let open = () => {
+  visible.value = true
+}
 
-// 提交按钮点击事件
-let submitForm = (scope: Scope) => {
-  scope.form.validate(valid => {
+// 点击取消按钮
+let cancle = (form: FormInstance) => {
+  visible.value = false
+  form.resetFields()
+}
+
+// 点击提交按钮
+let submit = (form: any) => {
+  const validate = form.validate()
+  validate((valid: any) => {
     if (valid) {
       ElMessage.success('提交成功')
-      console.log(JSON.parse(JSON.stringify(scope.model)))
-      form.value?.resetFields()
+      console.log(JSON.parse(JSON.stringify(form.getFormData())))
+      visible.value = false
+      form.resetFields()
     } else {
-      ElMessage.error('提交失败')
+      ElMessage.error('失败！')
     }
   })
-}
-// 重置按钮点击事件
-let resetForm = () => {
-  form.value?.resetFields()
-}
-
-let handleRemove = (params: any) => {
-  console.log(params)
-}
-let handlePreview = (params: any) => {
-  console.log(params)
-}
-let beforeRemove = (param: any) => {
-  return ElMessageBox.confirm(`确定要删除 ${JSON.parse(JSON.stringify(param.uploadFile)).name} 吗 ?`)
-}
-let handleExceed = (params: any) => {
-  ElMessage.warning('最多只可以上传一个文件！')
-}
-let handleSuccess = (params: any) => {
-  console.log('success')
-  console.log(params)
-}
-let handleChange = (params: any) => {
-  console.log('change')
-  console.log(params)
-}
-let handleBeforeUpload = (params: any) => {
-  console.log('handleBeforeUpload')
-  console.log(params)
 }
 </script> 
 
