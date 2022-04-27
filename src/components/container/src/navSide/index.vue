@@ -1,31 +1,31 @@
 <template>
   <div>
-    <el-menu :collapse="collapse" default-active="1">
-      <el-menu-item index="1" @click="clickItem(1)">
+    <el-menu :collapse="collapse" :default-active="$route.path">
+      <el-menu-item index="/" @click="clickItem('/')">
         <el-icon-homefilled />
         <span>首页</span>
       </el-menu-item>
-      <el-menu-item index="2" @click="clickItem(2)">
+      <el-menu-item index="/chooseIcon" @click="clickItem('/chooseIcon')">
         <el-icon-check />
         <span>图标选择器</span>
       </el-menu-item>
-      <el-menu-item index="3" @click="clickItem(3)">
+      <el-menu-item index="/chooseArea" @click="clickItem('/chooseArea')">
         <el-icon-locationinformation />
-        <span>城市选择器</span>
+        <span>省市区选择器</span>
       </el-menu-item>
-      <el-menu-item index="4" @click="clickItem(4)">
+      <el-menu-item index="/trend" @click="clickItem('/trend')">
         <el-icon-sort />
         <span>趋势标记</span>
       </el-menu-item>
-      <el-menu-item index="5" @click="clickItem(5)">
+      <el-menu-item index="/notification" @click="clickItem('/notification')">
         <el-icon-bell />
         <span>通知菜单</span>
       </el-menu-item>
-      <el-menu-item index="6" @click="clickItem(6)">
+      <el-menu-item index="/form" @click="clickItem('/form')">
         <el-icon-tickets />
         <span>表单</span>
       </el-menu-item>
-      <el-menu-item index="7" @click="clickItem(7)">
+      <el-menu-item index="/modalForm" @click="clickItem('/modalForm')">
         <el-icon-chatround />
         <span>弹出框表单</span>
       </el-menu-item>
@@ -34,34 +34,36 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 let props = defineProps<{
   collapse: Boolean
 }>()
 const $router = useRouter()
+const $route = useRoute()
 
-let clickItem = (index: Number) => {
+let clickItem = (index: string) => {
+  console.log($route);
   switch(index) {
-    case 1:
+    case '/':
       $router.push({ path: '/' })
     break
-    case 2:
+    case '/chooseIcon':
       $router.push({ path: '/chooseIcon' })
     break
-    case 3:
+    case '/chooseArea':
       $router.push({ path: '/chooseArea' })
     break
-    case 4:
+    case '/trend':
       $router.push({ path: '/trend' })
     break
-    case 5:
+    case '/notification':
       $router.push({ path: '/notification' })
     break
-    case 6:
+    case '/form':
       $router.push({ path: '/form' })
     break
-    case 7:
+    case '/modalForm':
       $router.push({ path: '/modalForm' })
     break
     default:

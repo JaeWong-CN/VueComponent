@@ -1,7 +1,14 @@
 <template>
   <el-dialog v-model="dialogVisible" v-bind="$attrs" :close-on-click-modal="false">
     <template #default>
-      <m-form label-width="100px" ref="form" :options="options" />
+      <m-form label-width="100px" ref="form" :options="options">
+        <template #uploadArea>
+          <slot name="uploadArea"></slot>
+        </template>
+        <template #uploadTip>
+          <slot name="uploadTip"></slot>
+        </template>
+      </m-form>
     </template>
     <template #footer>
       <slot name="footer" :form="form" />

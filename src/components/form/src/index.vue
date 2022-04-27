@@ -1,5 +1,13 @@
 <template>
-  <el-form ref="form" v-if="model" :model="model" :rules="rules" :validate-on-rule-change="false" v-bind="$attrs" class="el-form-container">
+  <el-form 
+    ref="form"
+    v-if="model"
+    :model="model"
+    :rules="rules"
+    :validate-on-rule-change="false"
+    v-bind="$attrs"
+    class="el-form-container"
+  >
     <template v-for="(item, index) in options" :key="index">
       <el-form-item
         v-if="!item.children || !item.children.length"
@@ -93,7 +101,7 @@ let form = ref<FormInstance | null>()
 let edit = ref()
 
 // 初始化表单
-const ininForm = () => {
+const initForm = () => {
   if (props.options && props.options.length) {
     props.options.map((item: FormOptions) => {
       model.value[item.prop!] = item.value
@@ -124,7 +132,7 @@ const ininForm = () => {
 let resetFields = () => {
   // 重置elementPlus的表单
   form.value?.resetFields()
-  // 重置富文本编辑器的内容
+  // 重置富文本编辑器
   if (props.options && props.options.length) {
     let editorItem = props.options.find(item => item.type === 'editor')!
     edit.value.txt.html(editorItem.value)
@@ -150,11 +158,11 @@ defineExpose({
 
 
 onMounted(() => {
-  ininForm()
+  initForm()
 })
 // 监听父组件传递进来的options
 watch(() => props.options, () => {
-  ininForm()
+  initForm()
 }, { deep: true })
 
 // 上传组件的所有方法

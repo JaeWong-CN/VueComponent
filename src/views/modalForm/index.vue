@@ -7,6 +7,12 @@
         <el-button @click="cancle(form)">取消</el-button>
         <el-button type="primary" @click="submit(form)">提交</el-button>
       </template>
+      <template #uploadArea>
+        <el-button size="small" type="primary">点击上传</el-button>
+      </template>
+      <template #uploadTip>
+        <div style="color: #ccc;font-size: 12px;">这个上传的随便你传~</div>
+      </template>
     </m-modal-form>
   </div>
 </template>
@@ -88,7 +94,7 @@ let options: FormOptions[] = [
       {
         required: true,
         message: '职位不能为空',
-        trigger: 'blur'
+        trigger: 'change'
       }
     ],
     children: [
@@ -118,7 +124,7 @@ let options: FormOptions[] = [
       {
         required: true,
         message: '请选择至少一个爱好',
-        trigger: 'blur'
+        trigger: 'change'
       }
     ],
     children: [
@@ -148,7 +154,7 @@ let options: FormOptions[] = [
       {
         required: true,
         message: '请选择性别',
-        trigger: 'blur'
+        trigger: 'change'
       }
     ],
     children: [
@@ -169,22 +175,22 @@ let options: FormOptions[] = [
       }
     ]
   },
-  // {
-  //   type: 'upload',
-  //   label: '上传头像',
-  //   prop: 'pic',
-  //   uploadAttrs: {
-  //     action: 'https://jsonplaceholder.typicode.com/posts/',
-  //     limit: 1
-  //   },
-  //   rules: [
-  //     {
-  //       required: true,
-  //       message: '请上传头像',
-  //       trigger: 'blur'
-  //     }
-  //   ]
-  // },
+  {
+    type: 'upload',
+    label: '上传头像',
+    prop: 'pic',
+    uploadAttrs: {
+      action: 'https://jsonplaceholder.typicode.com/posts/',
+      limit: 1
+    },
+    rules: [
+      {
+        required: true,
+        message: '请上传头像',
+        trigger: 'blur'
+      }
+    ]
+  },
   {
     type: 'editor',
     value: '',
