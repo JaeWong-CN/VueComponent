@@ -4,7 +4,7 @@
 
 <script lang='ts' setup>
 // 输出子组件派发过来的
-let change = (item) => {
+let change = (item: any) => {
   console.log(item)
 }
 </script> 

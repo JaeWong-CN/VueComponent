@@ -69,7 +69,7 @@ let cityList = ref<AreaItem[]>([])
 let areaList = ref<AreaItem[]>([])
 watch(() => province.value, val => {
   if (val) {
-    cityList.value = areas.value.find(v => v.code === province.value)?.children
+    cityList.value = areas.value.find(v => v.code === province.value)!.children!
   }
   // 省份选择有变化，需要清空后面已选择的城市与区域的值
   city.value = ''
@@ -77,7 +77,7 @@ watch(() => province.value, val => {
 })
 watch(() => city.value, val => {
   if (val) {
-    areaList.value = cityList.value.find(v => v.code === city.value)?.children
+    areaList.value = cityList.value.find(v => v.code === city.value)!.children!
   }
   // 城市选择有变化，仅需清空后面区域的值
   area.value = ''
